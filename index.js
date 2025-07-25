@@ -6,8 +6,31 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-let platillos = [];
-let idCounter = 1;
+let platillos = [
+    {
+      "id": "1",
+      "platilloId": 1,
+      "nombre": "Quesadillas de flor",
+      "precio": 40,
+      "imagen": "http://recetario.lavillita.com.mx/assets/images/recetas/Quesadillas-flor-calabaza-Oaxaca.jpg"
+    },
+    {
+      "id": "2",
+      "platilloId": 2,
+      "nombre": "Mole poblano",
+      "precio": 90,
+      "imagen": "https://www.seriouseats.com/thmb/qxfXHOw3gKw_rKMM87aVxTvSCws=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2012__10__20121024-227412-mole-poblano-8aa343f2cb384508834ed888a4b65df2.jpg"
+    },
+    {
+      "id": "3",
+      "platilloId": 3,
+      "nombre": "Tamales oaxaqueños",
+      "precio": 35,
+      "imagen": "https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/68D64DAE-9605-42AC-BDCF-328A509EC776/Derivates/7AC0E9FD-F0DA-410B-9D78-19D3C3BEA1F3.jpg"
+    }
+];
+
+let idCounter = 4;
 
 // POST /platillos - Agrega un nuevo platillo
 app.post('/platillos', (req, res) => {
