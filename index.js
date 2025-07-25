@@ -11,9 +11,9 @@ let idCounter = 1;
 
 // POST /platillos - Agrega un nuevo platillo
 app.post('/platillos', (req, res) => {
-    const { nombre, precio, estacionDelPlatillo } = req.body;
+    const { nombre, precio, estacionDelPlatillo, imagen } = req.body;
 
-    if (!nombre || !precio || !estacionDelPlatillo) {
+    if (!nombre || !precio || !estacionDelPlatillo || !imagen) {
         return res.status(400).json({ error: 'Faltan campos requeridos' });
     }
 
@@ -21,7 +21,8 @@ app.post('/platillos', (req, res) => {
         id: idCounter++,
         nombre,
         precio,
-        estacionDelPlatillo
+        estacionDelPlatillo,
+        imagen
     };
 
     platillos.push(nuevoPlatillo);
@@ -31,6 +32,19 @@ app.post('/platillos', (req, res) => {
 // GET /platillos - Devuelve todos los platillos
 app.get('/platillos', (req, res) => {
     res.json(platillos);
+});
+
+// DELETE /platillos/:id - Elimina un platillo por ID
+app.delete('/platillos/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const index = platillos.findIndex(p => p.id === id);
+    if (index === -1) {
+        return res.status(404).json({ error: 'Platillo no encontrado' });
+    }
+
+    platillos.splice(index, 1);
+    res.status(204).send(); // Sin contenido
 });
 
 app.listen(PORT, () => {
